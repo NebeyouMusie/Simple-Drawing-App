@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { toast } from '@/components/ui/use-toast';
 import { Undo2, Redo2, Circle, Square, Minus } from 'lucide-react';
+import { Triangle } from 'lucide-react';
 
 export const Canvas = () => {
   const {
@@ -49,8 +50,8 @@ export const Canvas = () => {
 
   return (
     <div className="flex flex-col h-screen font-poppins">
-      <div className="flex items-center justify-between p-4 bg-white shadow-sm">
-        <div className="flex items-center space-x-4">
+      <div className="flex flex-wrap items-center justify-between p-4 bg-white shadow-sm">
+        <div className="flex flex-wrap items-center gap-4">
           <input
             type="color"
             value={options.color}
@@ -66,7 +67,7 @@ export const Canvas = () => {
               step={1}
             />
           </div>
-          <div className="flex items-center space-x-2 border-l pl-4">
+          <div className="flex items-center gap-2 border-l pl-4">
             <Button
               variant={options.tool === 'brush' ? 'default' : 'outline'}
               onClick={() => setOptions({ ...options, tool: 'brush' })}
@@ -80,7 +81,7 @@ export const Canvas = () => {
               Eraser
             </Button>
           </div>
-          <div className="flex items-center space-x-2 border-l pl-4">
+          <div className="flex items-center gap-2 border-l pl-4">
             <Button
               variant={options.tool === 'rectangle' ? 'default' : 'outline'}
               onClick={() => setOptions({ ...options, tool: 'rectangle' })}
@@ -96,6 +97,13 @@ export const Canvas = () => {
               <Circle className="h-4 w-4" />
             </Button>
             <Button
+              variant={options.tool === 'triangle' ? 'default' : 'outline'}
+              onClick={() => setOptions({ ...options, tool: 'triangle' })}
+              size="icon"
+            >
+              <Triangle className="h-4 w-4" />
+            </Button>
+            <Button
               variant={options.tool === 'line' ? 'default' : 'outline'}
               onClick={() => setOptions({ ...options, tool: 'line' })}
               size="icon"
@@ -104,8 +112,8 @@ export const Canvas = () => {
             </Button>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2 border-r pr-4">
+        <div className="flex items-center gap-2 mt-4 sm:mt-0">
+          <div className="flex items-center gap-2 border-r pr-4">
             <Button
               variant="outline"
               size="icon"
