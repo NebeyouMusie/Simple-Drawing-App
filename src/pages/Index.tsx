@@ -26,7 +26,7 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+              src="https://images.unsplash.com/photo-1517971053567-8bde93bc6a58"
               alt="Simple drawing tools"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
@@ -36,7 +36,7 @@ const Index = () => {
 
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+              src="https://images.unsplash.com/photo-1497493292307-31c376b6e479"
               alt="Easy to use interface"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
@@ -46,7 +46,7 @@ const Index = () => {
 
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1472396961693-142e6e269027"
+              src="https://images.unsplash.com/photo-1600267204091-5c1ab8b10c02"
               alt="Save your work"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />

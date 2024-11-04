@@ -4,6 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { toast } from '@/components/ui/use-toast';
 import { Undo2, Redo2 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 export const Canvas = () => {
   const {
@@ -39,8 +48,8 @@ export const Canvas = () => {
     return () => window.removeEventListener('resize', resizeCanvas);
   }, []);
 
-  const handleDownload = () => {
-    downloadDrawing();
+  const handleDownload = (background: 'white' | 'transparent') => {
+    downloadDrawing(background);
     toast({
       title: "Success!",
       description: "Your drawing has been downloaded.",
@@ -103,9 +112,28 @@ export const Canvas = () => {
           <Button variant="outline" onClick={clearCanvas}>
             Clear
           </Button>
-          <Button onClick={handleDownload}>
-            Download
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button>Download</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Choose Background</DialogTitle>
+              </DialogHeader>
+              <div className="py-4">
+                <RadioGroup defaultValue="white" className="gap-4">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="white" id="white" onClick={() => handleDownload('white')} />
+                    <Label htmlFor="white">White Background</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="transparent" id="transparent" onClick={() => handleDownload('transparent')} />
+                    <Label htmlFor="transparent">Transparent Background</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="flex-1 relative bg-white">

@@ -78,30 +78,32 @@ export const useDrawing = () => {
     saveState(canvas);
   }, [saveState]);
 
-  const downloadDrawing = useCallback(() => {
+  const downloadDrawing = useCallback((background: 'white' | 'transparent' = 'white') => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const dataUrl = canvas.toDataURL('image/png');
+    // Create a temporary canvas to handle the background
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const tempCtx = tempCanvas.getContext('2d');
+    if (!tempCtx) return;
+
+    if (background === 'white') {
+      tempCtx.fillStyle = '#ffffff';
+      tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+    }
+
+    // Draw the original canvas content onto the temporary canvas
+    tempCtx.drawImage(canvas, 0, 0);
+
+    // Get the image data with the chosen background
+    const dataUrl = tempCanvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.download = 'drawing.png';
     link.href = dataUrl;
     link.click();
   }, []);
-
-  const handleUndo = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      undo(canvas);
-    }
-  }, [undo]);
-
-  const handleRedo = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      redo(canvas);
-    }
-  }, [redo]);
 
   return {
     canvasRef,
@@ -112,8 +114,8 @@ export const useDrawing = () => {
     stopDrawing,
     clearCanvas,
     downloadDrawing,
-    undo: handleUndo,
-    redo: handleRedo,
+    undo,
+    redo,
     canUndo,
     canRedo,
   };
