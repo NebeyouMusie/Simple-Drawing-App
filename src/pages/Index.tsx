@@ -26,32 +26,32 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1473091534298-04dcbce3278c"
-              alt="Drawing tools"
+              src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+              alt="Simple drawing tools"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2">Easy to Use Tools</h3>
-            <p className="text-gray-600">Simple and intuitive drawing tools for quick sketches and designs.</p>
+            <h3 className="text-xl font-semibold mb-2">Simple Drawing Tools</h3>
+            <p className="text-gray-600">Basic brush and eraser tools for quick, hassle-free sketching. No complex features to get in your way.</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
-              alt="User drawing"
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+              alt="Easy to use interface"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2">Free Drawing</h3>
-            <p className="text-gray-600">Express your creativity with our free-form drawing tools.</p>
+            <h3 className="text-xl font-semibold mb-2">Easy to Use</h3>
+            <p className="text-gray-600">Start drawing right away with our straightforward interface. No learning curve, just pure creativity.</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
-              alt="Download feature"
+              src="https://images.unsplash.com/photo-1472396961693-142e6e269027"
+              alt="Save your work"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2">Save Your Work</h3>
-            <p className="text-gray-600">Download your creations instantly to your device.</p>
+            <h3 className="text-xl font-semibold mb-2">Quick Save</h3>
+            <p className="text-gray-600">Download your simple sketches instantly with just one click. No account needed.</p>
           </div>
         </div>
       </div>
