@@ -64,7 +64,16 @@ export const useDrawing = () => {
       ctx.lineTo(x, y);
       ctx.stroke();
     } else if (startPoint) {
-      drawShape(ctx, startPoint, { x, y }, options);
+      // Get the last saved state
+      const lastState = new Image();
+      lastState.src = canvas.toDataURL();
+      lastState.onload = () => {
+        // Clear the canvas and restore the last state
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(lastState, 0, 0);
+        // Draw the new shape
+        drawShape(ctx, startPoint, { x, y }, options);
+      };
     }
   }, [isDrawing, options, startPoint]);
 
