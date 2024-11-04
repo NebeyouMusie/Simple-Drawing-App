@@ -1,4 +1,4 @@
-# Welcome to your GPT Engineer project
+# Simple Drawing App
 
 ## Project info
 
