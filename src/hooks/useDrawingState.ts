@@ -13,13 +13,13 @@ export const useDrawingState = () => {
   }, []);
 
   const undo = useCallback((canvas: HTMLCanvasElement) => {
-    if (undoStack.length <= 1) return;
+    if (undoStack.length === 0) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const currentState = undoStack[undoStack.length - 1];
-    const previousState = undoStack[undoStack.length - 2];
+    const previousState = undoStack.length > 1 ? undoStack[undoStack.length - 2] : null;
 
     setRedoStack(prev => [...prev, currentState]);
     setUndoStack(prev => prev.slice(0, -1));
@@ -60,7 +60,7 @@ export const useDrawingState = () => {
     saveState,
     undo,
     redo,
-    canUndo: undoStack.length > 1,
+    canUndo: undoStack.length > 0,
     canRedo: redoStack.length > 0,
   };
 };
