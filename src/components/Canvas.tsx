@@ -56,6 +56,20 @@ export const Canvas = () => {
     });
   };
 
+  const handleUndo = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      undo(canvas);
+    }
+  };
+
+  const handleRedo = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      redo(canvas);
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen font-poppins">
       <div className="flex flex-wrap items-center justify-between p-4 bg-white shadow-sm">
@@ -95,7 +109,7 @@ export const Canvas = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={undo}
+              onClick={handleUndo}
               disabled={!canUndo}
             >
               <Undo2 className="h-4 w-4" />
@@ -103,7 +117,7 @@ export const Canvas = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={redo}
+              onClick={handleRedo}
               disabled={!canRedo}
             >
               <Redo2 className="h-4 w-4" />
