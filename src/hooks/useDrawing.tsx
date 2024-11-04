@@ -1,12 +1,10 @@
 import { useRef, useState, useCallback } from 'react';
 import { DrawingOptions } from '@/types/drawing';
-import { drawShape } from './useDrawingTools';
 import { useDrawingState } from './useDrawingState';
 
 export const useDrawing = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [startPoint, setStartPoint] = useState<{ x: number; y: number } | null>(null);
   const [options, setOptions] = useState<DrawingOptions>({
     color: '#000000',
     size: 5,
@@ -34,18 +32,13 @@ export const useDrawing = () => {
     const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
     const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
 
-    if (options.tool === 'brush' || options.tool === 'eraser') {
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.strokeStyle = options.tool === 'eraser' ? '#ffffff' : options.color;
-      ctx.lineWidth = options.size;
-    } else {
-      setStartPoint({ x, y });
-      saveState(canvas);
-    }
-  }, [options, saveState]);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = options.tool === 'eraser' ? '#ffffff' : options.color;
+    ctx.lineWidth = options.size;
+  }, [options]);
 
   const draw = useCallback((e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!isDrawing) return;
@@ -60,22 +53,9 @@ export const useDrawing = () => {
     const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
     const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
 
-    if (options.tool === 'brush' || options.tool === 'eraser') {
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    } else if (startPoint) {
-      // Get the last saved state
-      const lastState = new Image();
-      lastState.src = canvas.toDataURL();
-      lastState.onload = () => {
-        // Clear the canvas and restore the last state
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(lastState, 0, 0);
-        // Draw the new shape
-        drawShape(ctx, startPoint, { x, y }, options);
-      };
-    }
-  }, [isDrawing, options, startPoint]);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }, [isDrawing]);
 
   const stopDrawing = useCallback(() => {
     if (isDrawing) {
@@ -84,7 +64,6 @@ export const useDrawing = () => {
         saveState(canvas);
       }
       setIsDrawing(false);
-      setStartPoint(null);
     }
   }, [isDrawing, saveState]);
 

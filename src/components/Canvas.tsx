@@ -3,8 +3,7 @@ import { useDrawing } from '@/hooks/useDrawing';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { toast } from '@/components/ui/use-toast';
-import { Undo2, Redo2, Circle, Square, Minus } from 'lucide-react';
-import { Triangle } from 'lucide-react';
+import { Undo2, Redo2 } from 'lucide-react';
 
 export const Canvas = () => {
   const {
@@ -79,36 +78,6 @@ export const Canvas = () => {
               onClick={() => setOptions({ ...options, tool: 'eraser' })}
             >
               Eraser
-            </Button>
-          </div>
-          <div className="flex items-center gap-2 border-l pl-4">
-            <Button
-              variant={options.tool === 'rectangle' ? 'default' : 'outline'}
-              onClick={() => setOptions({ ...options, tool: 'rectangle' })}
-              size="icon"
-            >
-              <Square className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={options.tool === 'circle' ? 'default' : 'outline'}
-              onClick={() => setOptions({ ...options, tool: 'circle' })}
-              size="icon"
-            >
-              <Circle className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={options.tool === 'triangle' ? 'default' : 'outline'}
-              onClick={() => setOptions({ ...options, tool: 'triangle' })}
-              size="icon"
-            >
-              <Triangle className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={options.tool === 'line' ? 'default' : 'outline'}
-              onClick={() => setOptions({ ...options, tool: 'line' })}
-              size="icon"
-            >
-              <Minus className="h-4 w-4" />
             </Button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 export interface DrawingOptions {
   color: string;
   size: number;
-  tool: 'brush' | 'eraser' | 'rectangle' | 'circle' | 'triangle' | 'line';
+  tool: 'brush' | 'eraser';
 }
 
 export interface DrawingState {
