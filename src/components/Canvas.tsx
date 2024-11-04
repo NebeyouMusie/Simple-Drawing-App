@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDrawing } from '@/hooks/useDrawing';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -15,6 +15,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 export const Canvas = () => {
+  const [selectedBackground, setSelectedBackground] = useState<'white' | 'transparent'>('white');
   const {
     canvasRef,
     options,
@@ -48,8 +49,8 @@ export const Canvas = () => {
     return () => window.removeEventListener('resize', resizeCanvas);
   }, []);
 
-  const handleDownload = (background: 'white' | 'transparent') => {
-    downloadDrawing(background);
+  const handleDownload = () => {
+    downloadDrawing(selectedBackground);
     toast({
       title: "Success!",
       description: "Your drawing has been downloaded.",
@@ -130,21 +131,30 @@ export const Canvas = () => {
             <DialogTrigger asChild>
               <Button>Download</Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="font-poppins">
               <DialogHeader>
                 <DialogTitle>Choose Background</DialogTitle>
               </DialogHeader>
               <div className="py-4">
-                <RadioGroup defaultValue="white" className="gap-4">
+                <RadioGroup 
+                  defaultValue="white" 
+                  className="gap-4"
+                  onValueChange={(value) => setSelectedBackground(value as 'white' | 'transparent')}
+                >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="white" id="white" onClick={() => handleDownload('white')} />
+                    <RadioGroupItem value="white" id="white" />
                     <Label htmlFor="white">White Background</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="transparent" id="transparent" onClick={() => handleDownload('transparent')} />
+                    <RadioGroupItem value="transparent" id="transparent" />
                     <Label htmlFor="transparent">Transparent Background</Label>
                   </div>
                 </RadioGroup>
+              </div>
+              <div className="flex justify-end">
+                <Button onClick={handleDownload}>
+                  Download
+                </Button>
               </div>
             </DialogContent>
           </Dialog>
